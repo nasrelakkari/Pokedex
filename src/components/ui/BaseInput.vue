@@ -89,7 +89,7 @@ const model = useModelWrapper<typeof props.modelValue>(
 
   input {
     border: 1px solid #b6afb5;
-    border-radius: size(5);
+    border-radius: 5px;
     outline: none;
     padding: 9px 12px;
     width: 100%;
