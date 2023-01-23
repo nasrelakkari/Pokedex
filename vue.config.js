@@ -10,9 +10,11 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       sass: {
-        data: `
+        sassOptions: {
+          data: `
           @import "@theme/scss/_spacing-helpers.scss";
         `,
+        },
       },
     },
   },

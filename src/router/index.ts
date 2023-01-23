@@ -3,6 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/views/Home.vue";
 import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
+import Pokemon from "@/views/Pokemon.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     path: `/${RoutesEnum.LOGIN}`,
     name: RoutesEnum.LOGIN,
     component: Login,
+  },
+  {
+    path: `/${RoutesEnum.POKEMONS}/:id`,
+    name: RoutesEnum.POKEMONS,
+    component: Pokemon,
   },
 ];
 

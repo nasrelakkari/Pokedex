@@ -1,21 +1,19 @@
 <template>
   <v-app>
     <v-main>
-      <router-view/>
+      <navbar />
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import Navbar from "./components/Navbar.vue";
+import { useAuthStore } from "./store/auth";
+import { onMounted } from "vue";
+const authStore = useAuthStore();
 
-export default defineComponent({
-  name: 'App',
-
-  data () {
-    return {
-      //
-    }
-  },
-})
+onMounted(async () => {
+  await authStore.getUser();
+});
 </script>

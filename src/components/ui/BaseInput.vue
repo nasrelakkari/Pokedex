@@ -25,7 +25,7 @@
         as="p"
         :name="name"
         v-slot="{ message }"
-        class="field-error error mt-2"
+        class="error mt-2"
       >
         {{ message }}
       </vee-error-message>
@@ -94,16 +94,16 @@ const model = useModelWrapper<typeof props.modelValue>(
     padding: 9px 12px;
     width: 100%;
     line-height: 20px;
-
-    .error {
-      border: 1px solid #da380b;
-    }
   }
 
   &--no-border {
     input {
       border: none;
     }
+  }
+
+  .error {
+    color: #da380b;
   }
 }
 </style>

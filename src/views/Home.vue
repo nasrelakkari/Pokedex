@@ -1,11 +1,7 @@
 <template>
-  <h1>home</h1>
+  <pokemon-list />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "Home",
-});
+<script setup lang="ts">
+import PokemonList from "@/components/pokemon/PokemonList.vue";
 </script>
