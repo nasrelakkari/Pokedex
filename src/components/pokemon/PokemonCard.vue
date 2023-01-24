@@ -48,6 +48,7 @@ const props = defineProps<{
   cursor: pointer;
   width: 80%;
   margin: 0 auto;
+  box-sizing: content-box;
 
   &__content {
     border: 3px solid black;
@@ -86,6 +87,7 @@ const props = defineProps<{
 
       &__content {
         display: flex;
+        gap: 10px;
       }
     }
   }

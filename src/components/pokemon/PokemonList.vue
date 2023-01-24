@@ -35,7 +35,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .pokemon-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 40px;
   width: 80%;
   margin: 50px auto;
