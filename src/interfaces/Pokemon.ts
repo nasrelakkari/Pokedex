@@ -8,6 +8,11 @@ export interface Pokemon {
   picture?: string;
 }
 
+export interface PokemonDetail extends Pokemon {
+  pokedex_creature: PokedexCreature;
+  trainer: Trainer;
+}
+
 export interface PokedexCreature {
   id: number;
   name: string;
@@ -29,4 +34,11 @@ export interface Trainer {
   id: number;
   username: string;
   email: string;
+}
+
+export interface AddPokemon {
+  pokedex_creature: number;
+  trainer: number;
+  nickname: string;
+  experience: number;
 }

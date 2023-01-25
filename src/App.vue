@@ -8,9 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from "./components/Navbar.vue";
-import { useAuthStore } from "./store/auth";
+import Navbar from "@/components/Navbar.vue";
+import { useAuthStore } from "@/store/auth";
 import { onMounted } from "vue";
+
 const authStore = useAuthStore();
 
 onMounted(async () => {

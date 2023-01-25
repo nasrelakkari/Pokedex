@@ -13,19 +13,27 @@
         <img :src="pokemon.picture" :alt="`${pokemon.nickname} picture`" />
       </div>
       <div
+        v-if="deleteButton"
+        class="pokemon-card__content__delete-btn"
+        @click.stop="deletePokemon(pokemon.id)"
+      >
+        <base-button>Delete</base-button>
+      </div>
+      <div
         v-if="
-          pokemon.pokedex_creature.attack && pokemon.pokedex_creature.defense
+          pokemonDetail.pokedex_creature.attack &&
+          pokemonDetail.pokedex_creature.defense
         "
         class="pokemon-card__content__power"
       >
         <div class="pokemon-card__content__power__content">
           <img :src="require('@/assets/img/icons/icon-attack.png')" />
-          <span>{{ pokemon.pokedex_creature.attack }}</span>
+          <span>{{ pokemonDetail.pokedex_creature.attack }}</span>
         </div>
 
         <div class="pokemon-card__content__power__content">
           <img :src="require('@/assets/img/icons/icon-defense.png')" />
-          <span>{{ pokemon.pokedex_creature.defense }}</span>
+          <span>{{ pokemonDetail.pokedex_creature.defense }}</span>
         </div>
       </div>
     </div>
@@ -33,12 +41,29 @@
 </template>
 
 <script setup lang="ts">
-import { Pokemon } from "@/interfaces/Pokemon";
-import { defineProps } from "vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
+import { PokedexCreature, PokemonDetail, Pokemon } from "@/interfaces/Pokemon";
+import { usePokemonStore } from "@/store/pokemon";
+import { defineProps, computed } from "vue";
 
-const props = defineProps<{
-  pokemon: Pokemon;
-}>();
+interface Props {
+  pokemon: Pokemon | PokemonDetail;
+  deleteButton?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  deleteButton: false,
+});
+
+const pokemonStore = usePokemonStore();
+
+const pokemonDetail = computed(() => {
+  return props.pokemon as PokemonDetail;
+});
+
+const deletePokemon = async (id: number) => {
+  await pokemonStore.deletePokemon(id);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -89,6 +114,11 @@ const props = defineProps<{
         display: flex;
         gap: 10px;
       }
+    }
+
+    &__delete-btn {
+      display: flex;
+      justify-content: center;
     }
   }
 }

@@ -6,7 +6,7 @@
     :initialValues="initialValues"
     @invalid-submit="onInvalidSubmitScroll"
   >
-    <p v-if="hasMandatoryField" class="mt-5">* champs obligatoires</p>
+    <p v-if="hasMandatoryField" class="mt-5">* required fields</p>
     <slot></slot>
     <base-button v-if="!noBtn" class="mt-7" type="submit">{{
       textBtnWithDefault

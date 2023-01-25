@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { Pokemon } from "@/interfaces/Pokemon";
+import { AddPokemon, Pokemon } from "@/interfaces/Pokemon";
+import { useToasterStore } from "./toaster";
 
 const apiUrl = "https://pokedexbe-akd7k.dev.simco.io/";
 
@@ -46,6 +47,46 @@ export const usePokemonStore = defineStore("PokemonStore", {
         });
         const picture = await this.getPokemonPicture(res.data.nickname);
         this.pokemon = { ...res.data, picture };
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    async addPokemon(payload: AddPokemon) {
+      try {
+        const toasterStore = useToasterStore();
+        const token = window.localStorage.getItem("access");
+        const res = await axios.post(
+          `${apiUrl}pokemon/`,
+          {
+            ...payload,
+          },
+          {
+            headers: { Authorization: "Bearer " + token },
+          }
+        );
+        if (res.status === 201) {
+          const picture = await this.getPokemonPicture(res.data.nickname);
+          this.pokemons.push({ ...res.data, picture });
+          toasterStore.launchToaster("Pokemon is added successfully!");
+          console.log(toasterStore.toasterText, toasterStore.toasterError);
+        } else {
+          toasterStore.launchToaster("This Pokemon does not exist", true);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    async deletePokemon(id: number) {
+      try {
+        const token = window.localStorage.getItem("access");
+        const res = await axios.delete(`${apiUrl}pokemon/${id}/`, {
+          headers: { Authorization: "Bearer " + token },
+        });
+        if (res.status === 204) {
+          this.pokemons = this.pokemons.filter((pokemon) => pokemon.id !== id);
+        }
       } catch (err) {
         console.error(err);
       }
