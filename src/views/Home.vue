@@ -91,12 +91,7 @@ onMounted(async () => {
 
 const submit = async (val: unknown) => {
   const formValue = val as AddPokemon;
-  await pokemonStore.addPokemon({
-    pokedex_creature: Number(formValue.pokedex_creature),
-    trainer: Number(formValue.trainer),
-    nickname: formValue.nickname,
-    experience: Number(formValue.experience),
-  });
+  await pokemonStore.addPokemon(formValue);
   openModal.value = false;
 };
 </script>
